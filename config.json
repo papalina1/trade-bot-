@@ -1,0 +1,14 @@
+{
+  "watchlist": {
+    "EURUSD": ["M5"],
+    "XAUUSD": ["M1", "M5"],
+    "BTCUSD": ["M15"]
+  },
+  "scanner_interval_seconds": 15,
+  "alert_cooldown_minutes": 5,
+  "min_score": 80,
+  "telegram": {
+    "bot_token": "8771529136:AAHgXomigr9jfB6Vb48vuxdzuDMz3pcJppw",
+    "chat_id": "6489320322"
+  }
+}

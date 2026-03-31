@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+apscheduler
+pandas
+numpy
+requests
+pydantic
+yfinance

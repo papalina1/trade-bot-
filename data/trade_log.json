@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "pair": "EURUSD",
+    "timeframe": "M5",
+    "direction": "BUY",
+    "score": 80,
+    "session": "London",
+    "fvg_zone": [
+      1.1470520496368408,
+      1.1471836566925049
+    ],
+    "timestamp": "2026-03-31T08:59:50",
+    "result": "pending"
+  },
+  {
+    "id": 2,
+    "pair": "XAUUSD",
+    "timeframe": "M1",
+    "direction": "BUY",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      4601.89990234375,
+      4602.2001953125
+    ],
+    "timestamp": "2026-03-31T08:59:59",
+    "result": "pending"
+  },
+  {
+    "id": 3,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "BUY",
+    "score": 80,
+    "session": "London",
+    "fvg_zone": [
+      66735.46875,
+      66998.3125
+    ],
+    "timestamp": "2026-03-31T09:00:00",
+    "result": "pending"
+  },
+  {
+    "id": 4,
+    "pair": "XAUUSD",
+    "timeframe": "M5",
+    "direction": "BUY",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      4596.39990234375,
+      4602.39990234375
+    ],
+    "timestamp": "2026-03-31T09:00:26",
+    "result": "pending"
+  },
+  {
+    "id": 5,
+    "pair": "EURUSD",
+    "timeframe": "M5",
+    "direction": "BUY",
+    "score": 80,
+    "session": "London",
+    "fvg_zone": [
+      1.1467890739440918,
+      1.147315263748169
+    ],
+    "timestamp": "2026-03-31T09:05:07",
+    "result": "pending"
+  },
+  {
+    "id": 6,
+    "pair": "XAUUSD",
+    "timeframe": "M1",
+    "direction": "BUY",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      4601.89990234375,
+      4602.2001953125
+    ],
+    "timestamp": "2026-03-31T09:05:10",
+    "result": "pending"
+  },
+  {
+    "id": 7,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      66752.0859375,
+      66815.890625
+    ],
+    "timestamp": "2026-03-31T09:05:11",
+    "result": "pending"
+  },
+  {
+    "id": 8,
+    "pair": "XAUUSD",
+    "timeframe": "M5",
+    "direction": "BUY",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      4596.39990234375,
+      4602.39990234375
+    ],
+    "timestamp": "2026-03-31T09:05:33",
+    "result": "pending"
+  },
+  {
+    "id": 9,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      66752.0859375,
+      66815.890625
+    ],
+    "timestamp": "2026-03-31T09:06:19",
+    "result": "pending"
+  }
+]
