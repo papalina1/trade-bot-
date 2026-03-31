@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FVG Trading Assistant</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0d0f14;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #111318;
+      border-bottom: 1px solid #1e2230;
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      color: #f0f4ff;
+    }
+    header h1 span { color: #6c8aff; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .75rem;
+      font-weight: 600;
+      color: #4ade80;
+      background: rgba(74,222,128,.1);
+      border: 1px solid rgba(74,222,128,.25);
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+    .badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; }
+      50% { opacity: .4; }
+    }
+    .refresh-btn {
+      background: #1e2230;
+      border: 1px solid #2d3348;
+      color: #94a3b8;
+      font-size: .8rem;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all .15s;
+      margin-left: 12px;
+    }
+    .refresh-btn:hover { background: #2d3348; color: #e2e8f0; }
+
+    /* ── Layout ── */
+    main { padding: 28px 32px; max-width: 1400px; margin: 0 auto; }
+
+    /* ── Stat Cards ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .card {
+      background: #111318;
+      border: 1px solid #1e2230;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .card .label {
+      font-size: .72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+    .card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+      color: #f0f4ff;
+    }
+    .card .sub {
+      font-size: .75rem;
+      color: #475569;
+      margin-top: 4px;
+    }
+    .card.green .value { color: #4ade80; }
+    .card.red .value { color: #f87171; }
+    .card.blue .value { color: #6c8aff; }
+    .card.yellow .value { color: #fbbf24; }
+
+    /* ── Two-col row ── */
+    .row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 700px) { .row2 { grid-template-columns: 1fr; } }
+
+    .panel {
+      background: #111318;
+      border: 1px solid #1e2230;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .panel h2 {
+      font-size: .85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      color: #94a3b8;
+      margin-bottom: 16px;
+    }
+
+    /* ── Bar list ── */
+    .bar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .bar-item:last-child { margin-bottom: 0; }
+    .bar-item .name {
+      font-size: .85rem;
+      font-weight: 600;
+      width: 80px;
+      flex-shrink: 0;
+      color: #e2e8f0;
+    }
+    .bar-track {
+      flex: 1;
+      background: #1e2230;
+      border-radius: 4px;
+      height: 8px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #6c8aff, #a78bfa);
+      transition: width .6s ease;
+    }
+    .bar-item .count {
+      font-size: .8rem;
+      color: #64748b;
+      width: 28px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* ── Trades Table ── */
+    .table-panel {
+      background: #111318;
+      border: 1px solid #1e2230;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .table-header {
+      padding: 18px 20px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #1e2230;
+    }
+    .table-header h2 {
+      font-size: .85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      color: #94a3b8;
+    }
+    .table-count {
+      font-size: .75rem;
+      color: #475569;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    thead th {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: #475569;
+      padding: 10px 20px;
+      text-align: left;
+      background: #0d0f14;
+      border-bottom: 1px solid #1e2230;
+    }
+    tbody tr {
+      border-bottom: 1px solid #151820;
+      transition: background .1s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #151820; }
+    tbody td {
+      padding: 12px 20px;
+      font-size: .85rem;
+      color: #cbd5e1;
+    }
+
+    /* ── Direction badge ── */
+    .dir {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 5px;
+    }
+    .dir.buy { background: rgba(74,222,128,.12); color: #4ade80; border: 1px solid rgba(74,222,128,.2); }
+    .dir.sell { background: rgba(248,113,113,.12); color: #f87171; border: 1px solid rgba(248,113,113,.2); }
+
+    /* ── Result badge ── */
+    .res {
+      display: inline-block;
+      font-size: .73rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 5px;
+    }
+    .res.win { background: rgba(74,222,128,.12); color: #4ade80; }
+    .res.loss { background: rgba(248,113,113,.12); color: #f87171; }
+    .res.pending { background: rgba(251,191,36,.1); color: #fbbf24; }
+
+    /* ── Score ── */
+    .score {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 700;
+    }
+    .score-bar {
+      width: 40px;
+      height: 4px;
+      background: #1e2230;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .score-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+    }
+    .score-high .score-bar-fill { background: #4ade80; }
+    .score-mid .score-bar-fill { background: #fbbf24; }
+    .score-low .score-bar-fill { background: #f87171; }
+
+    /* ── Pair & TF ── */
+    .pair { font-weight: 700; color: #e2e8f0; }
+    .tf {
+      font-size: .72rem;
+      color: #64748b;
+      background: #1e2230;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-left: 6px;
+    }
+
+    /* ── Timestamp ── */
+    .ts { color: #475569; font-size: .78rem; }
+
+    /* ── Empty / Loading ── */
+    .empty {
+      text-align: center;
+      padding: 40px;
+      color: #334155;
+      font-size: .9rem;
+    }
+
+    /* ── Update trade result ── */
+    .result-select {
+      background: #1e2230;
+      border: 1px solid #2d3348;
+      color: #94a3b8;
+      font-size: .75rem;
+      padding: 3px 6px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .result-select:hover { border-color: #6c8aff; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>FVG <span>Trading Assistant</span></h1>
+  <div style="display:flex;align-items:center;gap:8px">
+    <span class="badge">Live</span>
+    <button class="refresh-btn" onclick="loadAll()">Refresh</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ── Stat Cards ── -->
+  <div class="cards">
+    <div class="card blue">
+      <div class="label">Total Alerts</div>
+      <div class="value" id="total">—</div>
+      <div class="sub">all logged signals</div>
+    </div>
+    <div class="card yellow">
+      <div class="label">Win Rate</div>
+      <div class="value" id="winrate">—</div>
+      <div class="sub" id="resolved-sub">of resolved trades</div>
+    </div>
+    <div class="card green">
+      <div class="label">Winning</div>
+      <div class="value" id="wins">—</div>
+      <div class="sub">resolved wins</div>
+    </div>
+    <div class="card red">
+      <div class="label">Losing</div>
+      <div class="value" id="losses">—</div>
+      <div class="sub">resolved losses</div>
+    </div>
+    <div class="card">
+      <div class="label">Pending</div>
+      <div class="value" id="pending">—</div>
+      <div class="sub">awaiting result</div>
+    </div>
+  </div>
+
+  <!-- ── Top Pairs & Top Timeframes ── -->
+  <div class="row2">
+    <div class="panel">
+      <h2>Top Pairs</h2>
+      <div id="top-pairs"><div class="empty">Loading…</div></div>
+    </div>
+    <div class="panel">
+      <h2>Top Timeframes</h2>
+      <div id="top-tfs"><div class="empty">Loading…</div></div>
+    </div>
+  </div>
+
+  <!-- ── Recent Trades Table ── -->
+  <div class="table-panel">
+    <div class="table-header">
+      <h2>Recent Trades</h2>
+      <span class="table-count" id="trade-count"></span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Pair / TF</th>
+          <th>Direction</th>
+          <th>Entry</th>
+          <th>SL</th>
+          <th>TP</th>
+          <th>Result</th>
+          <th>Score</th>
+          <th>Time</th>
+          <th>Update</th>
+        </tr>
+      </thead>
+      <tbody id="trade-body">
+        <tr><td colspan="10" class="empty">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<script>
+  const BASE = '';   // same origin
+
+  async function loadAll() {
+    const [stats, trades] = await Promise.all([
+      fetch(`${BASE}/stats`).then(r => r.json()).catch(() => null),
+      fetch(`${BASE}/trades`).then(r => r.json()).catch(() => []),
+    ]);
+
+    if (stats) renderStats(stats);
+    if (trades) {
+      renderTopPairs(trades);
+      renderTopTfs(trades);
+      renderTable(trades);
+    }
+  }
+
+  function renderStats(s) {
+    set('total',   s.number_of_trades ?? 0);
+    set('winrate', (s.winrate ?? 0) + '%');
+    set('wins',    s.wins ?? 0);
+    set('losses',  s.losses ?? 0);
+    set('pending', s.pending ?? 0);
+    set('resolved-sub', `of ${s.resolved ?? 0} resolved`);
+  }
+
+  function renderTopPairs(trades) {
+    const counts = {};
+    trades.forEach(t => { counts[t.pair] = (counts[t.pair] || 0) + 1; });
+    renderBarList('top-pairs', counts);
+  }
+
+  function renderTopTfs(trades) {
+    const counts = {};
+    trades.forEach(t => { counts[t.timeframe] = (counts[t.timeframe] || 0) + 1; });
+    renderBarList('top-tfs', counts);
+  }
+
+  function renderBarList(elId, counts) {
+    const el = document.getElementById(elId);
+    const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1]).slice(0, 6);
+    if (!sorted.length) { el.innerHTML = '<div class="empty">No data</div>'; return; }
+    const max = sorted[0][1];
+    el.innerHTML = sorted.map(([name, count]) => `
+      <div class="bar-item">
+        <span class="name">${esc(name)}</span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:${Math.round(count/max*100)}%"></div>
+        </div>
+        <span class="count">${count}</span>
+      </div>
+    `).join('');
+  }
+
+  function renderTable(trades) {
+    const tbody = document.getElementById('trade-body');
+    document.getElementById('trade-count').textContent = `${trades.length} total`;
+
+    if (!trades.length) {
+      tbody.innerHTML = '<tr><td colspan="10" class="empty">No trades logged yet.</td></tr>';
+      return;
+    }
+
+    // Show most recent first
+    const sorted = [...trades].sort((a,b) => b.id - a.id);
+
+    tbody.innerHTML = sorted.map(t => {
+      const isBuy  = t.direction === 'BUY';
+      const scoreClass = t.score >= 90 ? 'score-high' : t.score >= 70 ? 'score-mid' : 'score-low';
+
+      const dirBadge = `<span class="dir ${isBuy?'buy':'sell'}">${isBuy ? '▲ BUY' : '▼ SELL'}</span>`;
+      const resBadge = `<span class="res ${t.result}">${t.result}</span>`;
+
+      const scoreBadge = `<span class="score ${scoreClass}">
+        ${t.score}
+        <div class="score-bar"><div class="score-bar-fill" style="width:${t.score}%"></div></div>
+      </span>`;
+
+      const ts = t.timestamp ? t.timestamp.replace('T',' ').slice(0,16) : '—';
+
+      const fmt = (v, dec) => v != null ? Number(v).toFixed(dec ?? 4) : '<span style="color:#334155">—</span>';
+
+      // Decimal places by pair
+      const dec = t.pair && t.pair.includes('BTC') ? 2 : t.pair && t.pair.includes('XAU') ? 2 : 5;
+
+      const entryCell = fmt(t.entry, dec);
+      const slCell = t.sl != null
+        ? `<span style="color:#f87171;font-weight:600">${fmt(t.sl, dec)}</span>`
+        : '<span style="color:#334155">—</span>';
+      const tpCell = t.tp != null
+        ? `<span style="color:#4ade80;font-weight:600">${fmt(t.tp, dec)}</span>`
+        : '<span style="color:#334155">—</span>';
+
+      const updateSel = t.result === 'pending'
+        ? `<select class="result-select" onchange="updateResult(${t.id}, this.value)">
+             <option value="">—</option>
+             <option value="win">Win</option>
+             <option value="loss">Loss</option>
+           </select>`
+        : `<span style="color:#334155;font-size:.75rem">—</span>`;
+
+      return `<tr>
+        <td style="color:#334155;font-size:.78rem">${t.id}</td>
+        <td><span class="pair">${esc(t.pair)}</span><span class="tf">${esc(t.timeframe)}</span></td>
+        <td>${dirBadge}</td>
+        <td style="font-size:.82rem">${entryCell}</td>
+        <td style="font-size:.82rem">${slCell}</td>
+        <td style="font-size:.82rem">${tpCell}</td>
+        <td>${resBadge}</td>
+        <td>${scoreBadge}</td>
+        <td class="ts">${ts}</td>
+        <td>${updateSel}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  async function updateResult(id, result) {
+    if (!result) return;
+    await fetch(`${BASE}/trades/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ result }),
+    });
+    loadAll();
+  }
+
+  function set(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  }
+
+  function esc(str) {
+    return String(str ?? '').replace(/[&<>"']/g, c =>
+      ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  // Initial load + auto-refresh every 15 s
+  loadAll();
+  setInterval(loadAll, 15000);
+</script>
+</body>
+</html>

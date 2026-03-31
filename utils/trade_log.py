@@ -50,6 +50,9 @@ def add_trade(
     score: int,
     session: str,
     fvg_zone: tuple[float, float] | None = None,
+    entry_price: float | None = None,
+    tp: float | None = None,
+    sl: float | None = None,
 ) -> dict:
     """Append a new trade alert to the log and return it."""
     trades = _load()
@@ -61,6 +64,9 @@ def add_trade(
         "score": score,
         "session": session,
         "fvg_zone": list(fvg_zone) if fvg_zone else None,
+        "entry": entry_price,
+        "tp": tp,
+        "sl": sl,
         "timestamp": datetime.utcnow().isoformat(timespec="seconds"),
         "result": "pending",
     }

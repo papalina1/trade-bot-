@@ -362,5 +362,438 @@
     ],
     "timestamp": "2026-03-31T11:12:53",
     "result": "pending"
+  },
+  {
+    "id": 27,
+    "pair": "EURUSD",
+    "timeframe": "M5",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      1.1546010971069336,
+      1.155401587486267
+    ],
+    "timestamp": "2026-03-31T18:17:22",
+    "result": "pending"
+  },
+  {
+    "id": 28,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      67676.515625,
+      67964.953125
+    ],
+    "timestamp": "2026-03-31T18:17:24",
+    "result": "pending"
+  },
+  {
+    "id": 29,
+    "pair": "XAUUSD",
+    "timeframe": "M1",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      4689.39990234375,
+      4691.7998046875
+    ],
+    "timestamp": "2026-03-31T18:17:59",
+    "result": "pending"
+  },
+  {
+    "id": 30,
+    "pair": "EURUSD",
+    "timeframe": "M5",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      1.1546010971069336,
+      1.155401587486267
+    ],
+    "entry": null,
+    "tp": null,
+    "sl": null,
+    "timestamp": "2026-03-31T18:20:20",
+    "result": "pending"
+  },
+  {
+    "id": 31,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      67676.515625,
+      67964.953125
+    ],
+    "entry": null,
+    "tp": null,
+    "sl": null,
+    "timestamp": "2026-03-31T18:20:21",
+    "result": "pending"
+  },
+  {
+    "id": 32,
+    "pair": "EURUSD",
+    "timeframe": "M5",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      1.1546010971069336,
+      1.155401587486267
+    ],
+    "entry": null,
+    "tp": null,
+    "sl": null,
+    "timestamp": "2026-03-31T18:20:27",
+    "result": "pending"
+  },
+  {
+    "id": 33,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      67676.515625,
+      67964.953125
+    ],
+    "entry": null,
+    "tp": null,
+    "sl": null,
+    "timestamp": "2026-03-31T18:20:30",
+    "result": "pending"
+  },
+  {
+    "id": 34,
+    "pair": "EURUSD",
+    "timeframe": "M5",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      1.1546010971069336,
+      1.155401587486267
+    ],
+    "entry": null,
+    "tp": null,
+    "sl": null,
+    "timestamp": "2026-03-31T18:20:40",
+    "result": "pending"
+  },
+  {
+    "id": 35,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      67676.515625,
+      67964.953125
+    ],
+    "entry": null,
+    "tp": null,
+    "sl": null,
+    "timestamp": "2026-03-31T18:20:42",
+    "result": "pending"
+  },
+  {
+    "id": 36,
+    "pair": "EURUSD",
+    "timeframe": "M5",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      1.1546010971069336,
+      1.155401587486267
+    ],
+    "entry": null,
+    "tp": null,
+    "sl": null,
+    "timestamp": "2026-03-31T18:20:55",
+    "result": "pending"
+  },
+  {
+    "id": 37,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      67676.515625,
+      67964.953125
+    ],
+    "entry": null,
+    "tp": null,
+    "sl": null,
+    "timestamp": "2026-03-31T18:21:00",
+    "result": "pending"
+  },
+  {
+    "id": 38,
+    "pair": "EURUSD",
+    "timeframe": "M5",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      1.1546010971069336,
+      1.155401587486267
+    ],
+    "entry": null,
+    "tp": null,
+    "sl": null,
+    "timestamp": "2026-03-31T18:21:03",
+    "result": "pending"
+  },
+  {
+    "id": 39,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      67676.515625,
+      67964.953125
+    ],
+    "entry": null,
+    "tp": null,
+    "sl": null,
+    "timestamp": "2026-03-31T18:21:04",
+    "result": "pending"
+  },
+  {
+    "id": 40,
+    "pair": "EURUSD",
+    "timeframe": "M5",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      1.1546010971069336,
+      1.155401587486267
+    ],
+    "entry": 1.1551345586776733,
+    "tp": 1.153534,
+    "sl": 1.155402,
+    "timestamp": "2026-03-31T18:21:07",
+    "result": "pending"
+  },
+  {
+    "id": 41,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      67676.515625,
+      67964.953125
+    ],
+    "entry": 67839.4453125,
+    "tp": 67262.570312,
+    "sl": 67964.953125,
+    "timestamp": "2026-03-31T18:21:10",
+    "result": "pending"
+  },
+  {
+    "id": 42,
+    "pair": "EURUSD",
+    "timeframe": "M5",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      1.1546010971069336,
+      1.155401587486267
+    ],
+    "entry": 1.1547343730926514,
+    "tp": 1.153133,
+    "sl": 1.155402,
+    "timestamp": "2026-03-31T18:26:31",
+    "result": "pending"
+  },
+  {
+    "id": 43,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      67676.515625,
+      67964.953125
+    ],
+    "entry": 67692.2890625,
+    "tp": 67115.414062,
+    "sl": 67964.953125,
+    "timestamp": "2026-03-31T18:26:43",
+    "result": "pending"
+  },
+  {
+    "id": 44,
+    "pair": "EURUSD",
+    "timeframe": "M5",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      1.1546010971069336,
+      1.155401587486267
+    ],
+    "entry": 1.155001163482666,
+    "tp": 1.1534,
+    "sl": 1.155402,
+    "timestamp": "2026-03-31T18:31:44",
+    "result": "pending"
+  },
+  {
+    "id": 45,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      67676.515625,
+      67964.953125
+    ],
+    "entry": 67718.2578125,
+    "tp": 67141.382812,
+    "sl": 67964.953125,
+    "timestamp": "2026-03-31T18:31:45",
+    "result": "pending"
+  },
+  {
+    "id": 46,
+    "pair": "XAUUSD",
+    "timeframe": "M1",
+    "direction": "BUY",
+    "score": 100,
+    "session": "New York",
+    "fvg_zone": [
+      4690.0,
+      4692.5
+    ],
+    "entry": 4692.39990234375,
+    "tp": 4697.399902,
+    "sl": 4690.0,
+    "timestamp": "2026-03-31T18:36:07",
+    "result": "pending"
+  },
+  {
+    "id": 47,
+    "pair": "EURUSD",
+    "timeframe": "M5",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      1.1546010971069336,
+      1.155401587486267
+    ],
+    "entry": 1.1547343730926514,
+    "tp": 1.153133,
+    "sl": 1.155402,
+    "timestamp": "2026-03-31T18:36:52",
+    "result": "pending"
+  },
+  {
+    "id": 48,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      67676.515625,
+      67964.953125
+    ],
+    "entry": 67685.3046875,
+    "tp": 67108.429688,
+    "sl": 67964.953125,
+    "timestamp": "2026-03-31T18:38:02",
+    "result": "pending"
+  },
+  {
+    "id": 49,
+    "pair": "EURUSD",
+    "timeframe": "M5",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      1.1546010971069336,
+      1.155401587486267
+    ],
+    "entry": 1.155001163482666,
+    "tp": 1.1534,
+    "sl": 1.155402,
+    "timestamp": "2026-03-31T18:40:19",
+    "result": "pending"
+  },
+  {
+    "id": 50,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      67676.515625,
+      67964.953125
+    ],
+    "entry": 67729.546875,
+    "tp": 67152.671875,
+    "sl": 67964.953125,
+    "timestamp": "2026-03-31T18:40:23",
+    "result": "pending"
+  },
+  {
+    "id": 51,
+    "pair": "EURUSD",
+    "timeframe": "M5",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      1.1546010971069336,
+      1.155401587486267
+    ],
+    "entry": 1.1547343730926514,
+    "tp": 1.153133,
+    "sl": 1.155402,
+    "timestamp": "2026-03-31T18:40:26",
+    "result": "pending"
+  },
+  {
+    "id": 52,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 80,
+    "session": "New York",
+    "fvg_zone": [
+      67676.515625,
+      67964.953125
+    ],
+    "entry": 67729.546875,
+    "tp": 67152.671875,
+    "sl": 67964.953125,
+    "timestamp": "2026-03-31T18:40:37",
+    "result": "pending"
   }
 ]

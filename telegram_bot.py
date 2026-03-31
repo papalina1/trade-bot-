@@ -46,18 +46,31 @@ class TelegramBot:
         session: str,
         trend: str,
         fvg_zone: tuple[float, float] | None = None,
+        entry: float | None = None,
+        tp: float | None = None,
+        sl: float | None = None,
     ) -> bool:
         emoji = "🟢" if direction.upper() == "BUY" else "🔴"
+
         zone_str = ""
         if fvg_zone:
             zone_str = f"\n📍 FVG Zone: {fvg_zone[0]:.5f} – {fvg_zone[1]:.5f}"
 
+        levels_str = ""
+        if entry is not None:
+            levels_str += f"\n🎯 Entry: <b>{entry:.5f}</b>"
+        if tp is not None:
+            levels_str += f"\n✅ TP: <b>{tp:.5f}</b>"
+        if sl is not None:
+            levels_str += f"\n❌ SL: <b>{sl:.5f}</b>"
+
         text = (
-            f"{emoji} <b>{pair} {timeframe} {direction.upper()} opportunity</b>\n"
+            f"{emoji} <b>{pair} {timeframe} {direction.upper()}</b>\n"
             f"📊 Score: <b>{score}</b>\n"
             f"🕐 Session: {session}\n"
             f"📈 Trend: {trend.capitalize()}"
-            f"{zone_str}\n"
+            f"{zone_str}"
+            f"{levels_str}\n"
             f"✅ FVG retest confirmed"
         )
         return self.send_message(text)

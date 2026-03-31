@@ -11,9 +11,12 @@ The APScheduler background job runs the scanner every N seconds
 import json
 import logging
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from scanner import load_config, run_scan
@@ -95,6 +98,10 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+_static = Path("static")
+if _static.is_dir():
+    app.mount("/static", StaticFiles(directory="static"), name="static")
+
 
 # ---------------------------------------------------------------------------
 # Routes
@@ -103,6 +110,12 @@ app = FastAPI(
 @app.get("/", tags=["Health"])
 def root():
     return {"status": "running", "message": "FVG Trading Assistant is active"}
+
+
+@app.get("/dashboard", tags=["Dashboard"], response_class=FileResponse)
+def dashboard():
+    """Serve the trading dashboard UI."""
+    return FileResponse("static/dashboard.html")
 
 
 @app.get("/stats", tags=["Dashboard"])

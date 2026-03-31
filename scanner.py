@@ -19,7 +19,7 @@ from indicators import get_trend
 from telegram_bot import TelegramBot
 from utils.scoring import calculate_score
 from utils.session import get_active_sessions, is_session_active, primary_session
-from utils.trade_log import add_trade
+from utils.trade_log import add_trade, get_all_trades, update_result
 
 logger = logging.getLogger(__name__)
 
@@ -42,6 +42,92 @@ def _cooldown_minutes(config: dict) -> int:
 
 def _min_score(config: dict) -> int:
     return int(config.get("min_score", 80))
+
+
+def _rr(config: dict) -> float:
+    return float(config.get("risk_reward_ratio", 2.0))
+
+
+# ---------------------------------------------------------------------------
+# TP / SL calculation
+# ---------------------------------------------------------------------------
+
+def _calculate_tp_sl(
+    direction: str,
+    entry: float,
+    fvg_low: float,
+    fvg_high: float,
+    rr: float,
+) -> tuple[float, float]:
+    """
+    Returns (tp, sl).
+
+    BUY  → SL below the FVG zone, TP at entry + risk * RR
+    SELL → SL above the FVG zone, TP at entry - risk * RR
+    """
+    if direction == "BUY":
+        sl = fvg_low
+        risk = max(entry - sl, fvg_high - fvg_low)   # at least the gap size
+        tp = entry + risk * rr
+    else:
+        sl = fvg_high
+        risk = max(sl - entry, fvg_high - fvg_low)
+        tp = entry - risk * rr
+    return round(tp, 6), round(sl, 6)
+
+
+# ---------------------------------------------------------------------------
+# Auto-resolve pending trades
+# ---------------------------------------------------------------------------
+
+def _auto_resolve(pair: str, timeframe: str, df) -> None:
+    """
+    For every pending trade on this pair/timeframe that has a TP and SL,
+    scan subsequent candles to see if price hit TP or SL first.
+    """
+    pending = [
+        t for t in get_all_trades()
+        if t["result"] == "pending"
+        and t["pair"] == pair
+        and t["timeframe"] == timeframe
+        and t.get("tp") is not None
+        and t.get("sl") is not None
+    ]
+    if not pending:
+        return
+
+    for trade in pending:
+        try:
+            trade_time = datetime.fromisoformat(trade["timestamp"])
+            tp = trade["tp"]
+            sl = trade["sl"]
+            direction = trade["direction"]
+
+            after = df[df.index > trade_time]
+            if after.empty:
+                continue
+
+            for _, candle in after.iterrows():
+                if direction == "BUY":
+                    if float(candle["low"]) <= sl:
+                        update_result(trade["id"], "loss")
+                        logger.info(f"Auto-resolved trade {trade['id']} {pair}/{timeframe} → LOSS (SL hit)")
+                        break
+                    if float(candle["high"]) >= tp:
+                        update_result(trade["id"], "win")
+                        logger.info(f"Auto-resolved trade {trade['id']} {pair}/{timeframe} → WIN (TP hit)")
+                        break
+                else:
+                    if float(candle["high"]) >= sl:
+                        update_result(trade["id"], "loss")
+                        logger.info(f"Auto-resolved trade {trade['id']} {pair}/{timeframe} → LOSS (SL hit)")
+                        break
+                    if float(candle["low"]) <= tp:
+                        update_result(trade["id"], "win")
+                        logger.info(f"Auto-resolved trade {trade['id']} {pair}/{timeframe} → WIN (TP hit)")
+                        break
+        except Exception:
+            logger.exception(f"Auto-resolve failed for trade {trade['id']}")
 
 
 # ---------------------------------------------------------------------------
@@ -72,6 +158,7 @@ def scan_pair(pair: str, timeframe: str, config: dict, bot: TelegramBot) -> dict
     """
     cooldown = _cooldown_minutes(config)
     min_score = _min_score(config)
+    rr = _rr(config)
 
     # --- Cooldown check ---
     if _on_cooldown(pair, timeframe, cooldown):
@@ -86,6 +173,9 @@ def scan_pair(pair: str, timeframe: str, config: dict, bot: TelegramBot) -> dict
         return None
 
     current_price = float(df["close"].iloc[-1])
+
+    # --- Auto-resolve pending trades using latest candles ---
+    _auto_resolve(pair, timeframe, df)
 
     # --- Trend filter ---
     trend = get_trend(df)
@@ -135,11 +225,12 @@ def scan_pair(pair: str, timeframe: str, config: dict, bot: TelegramBot) -> dict
 
         direction = "BUY" if fvg.type == "bullish" else "SELL"
         zone = (fvg.low, fvg.high)
+        tp, sl = _calculate_tp_sl(direction, current_price, fvg.low, fvg.high, rr)
 
         logger.info(
             f"[{pair}/{timeframe}] ALERT {direction} | score={breakdown.total} "
             f"| session={session_name} | trend={trend} | zone={zone} "
-            f"| gap={fvg.gap_size:.5f} | price={current_price:.5f}"
+            f"| entry={current_price:.5f} | TP={tp:.5f} | SL={sl:.5f}"
         )
 
         # --- Send Telegram alert ---
@@ -151,6 +242,9 @@ def scan_pair(pair: str, timeframe: str, config: dict, bot: TelegramBot) -> dict
             session=session_name,
             trend=trend,
             fvg_zone=zone,
+            entry=current_price,
+            tp=tp,
+            sl=sl,
         )
 
         # --- Persist to trade log ---
@@ -161,6 +255,9 @@ def scan_pair(pair: str, timeframe: str, config: dict, bot: TelegramBot) -> dict
             score=breakdown.total,
             session=session_name,
             fvg_zone=zone,
+            entry_price=current_price,
+            tp=tp,
+            sl=sl,
         )
 
         # --- Set cooldown so we don't spam ---
