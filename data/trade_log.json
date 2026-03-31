@@ -124,5 +124,243 @@
     ],
     "timestamp": "2026-03-31T09:06:19",
     "result": "pending"
+  },
+  {
+    "id": 10,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      66633.4296875,
+      66732.75
+    ],
+    "timestamp": "2026-03-31T09:18:00",
+    "result": "pending"
+  },
+  {
+    "id": 11,
+    "pair": "XAUUSD",
+    "timeframe": "M1",
+    "direction": "BUY",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      4596.5,
+      4599.39990234375
+    ],
+    "timestamp": "2026-03-31T09:18:51",
+    "result": "pending"
+  },
+  {
+    "id": 12,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      66362.390625,
+      66567.4296875
+    ],
+    "timestamp": "2026-03-31T09:32:54",
+    "result": "pending"
+  },
+  {
+    "id": 13,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      66439.8828125,
+      66567.4296875
+    ],
+    "timestamp": "2026-03-31T09:46:50",
+    "result": "pending"
+  },
+  {
+    "id": 14,
+    "pair": "XAUUSD",
+    "timeframe": "M1",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      4589.2998046875,
+      4592.0
+    ],
+    "timestamp": "2026-03-31T10:00:06",
+    "result": "pending"
+  },
+  {
+    "id": 15,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      66107.5078125,
+      66352.546875
+    ],
+    "timestamp": "2026-03-31T10:02:50",
+    "result": "pending"
+  },
+  {
+    "id": 16,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      66174.9375,
+      66352.546875
+    ],
+    "timestamp": "2026-03-31T10:08:15",
+    "result": "pending"
+  },
+  {
+    "id": 17,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      66266.609375,
+      66352.546875
+    ],
+    "timestamp": "2026-03-31T10:13:31",
+    "result": "pending"
+  },
+  {
+    "id": 18,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      66302.6171875,
+      66352.546875
+    ],
+    "timestamp": "2026-03-31T10:18:45",
+    "result": "pending"
+  },
+  {
+    "id": 19,
+    "pair": "BTCUSD",
+    "timeframe": "M15",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      66214.421875,
+      66310.3671875
+    ],
+    "timestamp": "2026-03-31T10:47:51",
+    "result": "pending"
+  },
+  {
+    "id": 20,
+    "pair": "EURUSD",
+    "timeframe": "M5",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      1.1461317539215088,
+      1.1467890739440918
+    ],
+    "timestamp": "2026-03-31T10:50:21",
+    "result": "pending"
+  },
+  {
+    "id": 21,
+    "pair": "XAUUSD",
+    "timeframe": "M1",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      4569.60009765625,
+      4576.2998046875
+    ],
+    "timestamp": "2026-03-31T10:52:50",
+    "result": "pending"
+  },
+  {
+    "id": 22,
+    "pair": "XAUUSD",
+    "timeframe": "M1",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      4569.60009765625,
+      4576.2998046875
+    ],
+    "timestamp": "2026-03-31T10:58:12",
+    "result": "pending"
+  },
+  {
+    "id": 23,
+    "pair": "XAUUSD",
+    "timeframe": "M5",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      4574.60009765625,
+      4584.39990234375
+    ],
+    "timestamp": "2026-03-31T11:00:20",
+    "result": "pending"
+  },
+  {
+    "id": 24,
+    "pair": "XAUUSD",
+    "timeframe": "M5",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      4574.60009765625,
+      4584.39990234375
+    ],
+    "timestamp": "2026-03-31T11:05:36",
+    "result": "pending"
+  },
+  {
+    "id": 25,
+    "pair": "XAUUSD",
+    "timeframe": "M5",
+    "direction": "SELL",
+    "score": 100,
+    "session": "London",
+    "fvg_zone": [
+      4574.60009765625,
+      4584.39990234375
+    ],
+    "timestamp": "2026-03-31T11:10:50",
+    "result": "pending"
+  },
+  {
+    "id": 26,
+    "pair": "XAUUSD",
+    "timeframe": "M1",
+    "direction": "BUY",
+    "score": 80,
+    "session": "London",
+    "fvg_zone": [
+      4572.0,
+      4574.39990234375
+    ],
+    "timestamp": "2026-03-31T11:12:53",
+    "result": "pending"
   }
 ]
